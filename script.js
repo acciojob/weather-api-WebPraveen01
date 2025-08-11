@@ -1,21 +1,23 @@
-document.getElementById('getWeatherBtn').addEventListener('click', function() {
-    // Your API Key here
-    const apiKey = 'YOUR_API_KEY';
-    const city = 'London';
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+document.getElementById("getWeatherBtn").addEventListener("click", () => {
+            const apiKey = "c48de2a4ec67cfbcf32bb4185c907df2"; // Replace with your OpenWeatherMap API key
+            const city = "London";
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const weatherDescription = data.weather[0].description;
-            document.getElementById('weatherData').innerText = `Current weather in London: ${weatherDescription}`;
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.weather && data.weather.length > 0) {
+                        const weatherDescription = data.weather[0].main; 
+                        document.getElementById("weatherData").textContent = 
+                            `Current weather in ${city}: ${weatherDescription}`;
+                    } else {
+                        document.getElementById("weatherData").textContent = 
+                            "Weather data not found.";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching weather data:", error);
+                    document.getElementById("weatherData").textContent = 
+                        "Error fetching weather data.";
+                });
         });
-});
