@@ -1,18 +1,18 @@
 document.getElementById("getWeatherBtn").addEventListener("click", () => {
-            const apiKey = "c48de2a4ec67cfbcf32bb4185c907df2"; // Replace with your OpenWeatherMap API key
+            const apiKey = "c48de2a4ec67cfbcf32bb4185c907df2"; // Your API key
             const city = "London";
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${c48de2a4ec67cfbcf32bb4185c907df2}`;
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    if (data.weather && data.weather.length > 0) {
+                    if (data.cod === 200 && data.weather && data.weather.length > 0) {
                         const weatherDescription = data.weather[0].main; 
                         document.getElementById("weatherData").textContent = 
                             `Current weather in ${city}: ${weatherDescription}`;
                     } else {
                         document.getElementById("weatherData").textContent = 
-                            "Weather data not found.";
+                            `Error: ${data.message}`;
                     }
                 })
                 .catch(error => {
