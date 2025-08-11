@@ -1,7 +1,7 @@
 document.getElementById("getWeatherBtn").addEventListener("click", () => {
             const apiKey = "c48de2a4ec67cfbcf32bb4185c907df2"; // Replace with your OpenWeatherMap API key
             const city = "London";
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${c48de2a4ec67cfbcf32bb4185c907df2}`;
 
             fetch(url)
                 .then(response => response.json())
